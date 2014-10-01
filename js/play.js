@@ -123,6 +123,12 @@ var playState = {
     this.scoreLabel.text = 'score: ' + game.global.score;
     this.updateCoinPosition();
     this.coinSound.play();
+    // make the coin's spontaneously grow into their places
+    this.coin.scale.setTo(0, 0);
+    game.add.tween(this.coin.scale).to({x: 1, y: 1}, 300).start();
+    // make the user swell a little bit every time a coin is collected
+    game.add.tween(this.player.scale).to({x: 1.3, y: 1.3}, 50).to({x: 1, y: 1}, 150).start();
+
   },
   
   playerDie: function() {
