@@ -1,8 +1,8 @@
 var game = new Phaser.Game(500, 340, Phaser.AUTO, 'gameDiv');
 
 game.global = {
-  score: 0,
-  musicOn: 0 
+    score: 0,
+    musicOn: 0
 };
 
 game.state.add('boot', bootState);
