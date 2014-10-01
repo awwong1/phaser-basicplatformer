@@ -20,6 +20,14 @@ var menuState = {
                                    { font: '25px Arial', fill: '#ffffff' });
     startLabel.anchor.setTo(0.5, 0.5);
     
+    if( game.global.musicOn == 0 )
+    {
+      this.music = game.add.audio('music');
+      this.music.loop = true;
+      this.music.play();
+      game.global.musicOn = 1;
+    }
+    
     // Create phaser keyboard variable, up arrow key
     var upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
     // When 'upKey' is pressed, call start function once
