@@ -23,6 +23,12 @@ var playState = {
     this.enemies.enableBody = true;
     this.enemies.createMultiple(10, 'enemy');
     game.time.events.loop(2200, this.addEnemy, this);
+    
+    // Sounds
+    this.jumpSound = game.add.audio('jump');
+    this.coinSound = game.add.audio('coin');
+    this.deadSound = game.add.audio('dead');
+    
     this.createWorld();
   },
   
@@ -51,6 +57,7 @@ var playState = {
     // If the user wants to jump
     if (this.cursor.up.isDown && this.player.body.touching.down) {
       this.player.body.velocity.y = -320;
+      this.jumpSound.play();
     }
   },
   
@@ -109,9 +116,11 @@ var playState = {
     game.global.score += 5;
     this.scoreLabel.text = 'score: ' + game.global.score;
     this.updateCoinPosition();
+    this.coinSound.play();
   },
   
   playerDie: function() {
     game.state.start('menu');
+    this.deadSound.play();
   }
 };

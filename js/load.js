@@ -16,7 +16,10 @@ var loadState = {
     game.load.image('coin', 'assets/coin.png');
     game.load.image('wallV', 'assets/wallVertical.png');
     game.load.image('wallH', 'assets/wallHorizontal.png');
-    
+    game.load.audio('jump', ['assets/jump.ogg', 'assets/jump.mp3']);
+    game.load.audio('coin', ['assets/coin.ogg', 'assets/coin.mp3']);    
+    game.load.audio('dead', ['assets/dead.ogg', 'assets/dead.mp3']);
+
     // Load a new assets that will be used in the menu state
     game.load.image('background', 'assets/background.png');
   },
