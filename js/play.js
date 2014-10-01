@@ -2,6 +2,8 @@ var playState = {
   create: function() {
     // Player
     this.player = game.add.sprite(game.world.centerX, game.world.centerY, 'player');
+    this.player.animations.add('right', [1, 2], 8, true);
+    this.player.animations.add('left', [3, 4], 8, true);
     this.player.anchor.setTo(0.5, 0.5);
     game.physics.arcade.enable(this.player);
     this.player.body.gravity.y = 500;
@@ -47,13 +49,17 @@ var playState = {
     // Left and right movement
     if (this.cursor.left.isDown) {
       this.player.body.velocity.x = -200;
+      this.player.animations.play('left');
     }
     else if (this.cursor.right.isDown) {
       this.player.body.velocity.x = 200;
+      this.player.animations.play('right');
     }
     else {
       this.player.body.velocity.x =0;
-      }
+      this.player.animations.stop();
+      this.player.frame = 0;
+    }
     // If the user wants to jump
     if (this.cursor.up.isDown && this.player.body.touching.down) {
       this.player.body.velocity.y = -320;
