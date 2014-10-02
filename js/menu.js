@@ -25,7 +25,7 @@ var menuState = {
 
         // Show start game instructions
         var startLabel = game.add.text(game.world.centerX, game.world.height - 80,
-            'press the up arrow to begin',
+            'press the up arrow or W to begin',
             { font: '25px Arial', fill: '#ffffff' });
         startLabel.anchor.setTo(0.5, 0.5);
         game.add.tween(startLabel).to({angle: -2}, 500).to({angle: 2}, 500).loop().start();
@@ -49,6 +49,8 @@ var menuState = {
         var upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
         // When 'upKey' is pressed, call start function once
         upKey.onDown.addOnce(this.start, this);
+        // Added 'w' is pressed, call Start function once
+        game.wasd.up.onDown.addOnce(this.start, this);
     },
 
     start: function () {
@@ -56,8 +58,8 @@ var menuState = {
         game.state.start('play');
     },
 
-    toggleSound: function() {
-        game.sound.mute = ! game.sound.mute;
+    toggleSound: function () {
+        game.sound.mute = !game.sound.mute;
         this.muteButton.frame = game.sound.mute ? 1 : 0;
     }
 };

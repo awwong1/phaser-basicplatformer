@@ -19,10 +19,10 @@ var loadState = {
         game.load.image('wallH', 'assets/wallHorizontal.png');
         game.load.image('pixel', 'assets/pixel.png');
         game.load.spritesheet('mute', 'assets/muteButton.png', 28, 22);
-        game.load.audio('jump', ['assets/jump.ogg', 'assets/jump.mp3']);
-        game.load.audio('coin', ['assets/coin.ogg', 'assets/coin.mp3']);
-        game.load.audio('dead', ['assets/dead.ogg', 'assets/dead.mp3']);
-        game.load.audio('music', ['assets/music.ogg', 'assets/music.mp3']);
+        game.load.audio('jump', ['assets/jump.ogg', 'assets/jump.mp3'], true);
+        game.load.audio('coin', ['assets/coin.ogg', 'assets/coin.mp3'], true);
+        game.load.audio('dead', ['assets/dead.ogg', 'assets/dead.mp3'], true);
+        game.load.audio('music', ['assets/music.ogg', 'assets/music.mp3'], true);
 
         // Load a new assets that will be used in the menu state
         game.load.image('background', 'assets/background.png');

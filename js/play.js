@@ -64,11 +64,11 @@ var playState = {
 
     movePlayer: function () {
         // Left and right movement
-        if (this.cursor.left.isDown) {
+        if (this.cursor.left.isDown || game.wasd.left.isDown) {
             this.player.body.velocity.x = -200;
             this.player.animations.play('left');
         }
-        else if (this.cursor.right.isDown) {
+        else if (this.cursor.right.isDown || game.wasd.right.isDown) {
             this.player.body.velocity.x = 200;
             this.player.animations.play('right');
         }
@@ -78,7 +78,7 @@ var playState = {
             this.player.frame = 0;
         }
         // If the user wants to jump
-        if (this.cursor.up.isDown && this.player.body.touching.down) {
+        if ((this.cursor.up.isDown || game.wasd.up.isDown) && this.player.body.touching.down) {
             this.player.body.velocity.y = -320;
             this.jumpSound.play();
         }
@@ -138,7 +138,7 @@ var playState = {
         enemy.outOfBoundsKill = true;
     },
 
-    takeCoin: function (player, coin) {
+    takeCoin: function () {
         game.global.score += 5;
         this.scoreLabel.text = 'score: ' + game.global.score;
         this.updateCoinPosition();
