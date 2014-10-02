@@ -31,6 +31,13 @@ var playState = {
         this.coinSound = game.add.audio('coin');
         this.deadSound = game.add.audio('dead');
 
+        // Particle emitter
+        this.emitter = game.add.emitter(0, 0, 15);
+        this.emitter.makeParticles('pixel');
+        this.emitter.setYSpeed(-150, 150);
+        this.emitter.setXSpeed(-150, 150);
+        this.emitter.gravity = 0;
+
         this.createWorld();
     },
 
@@ -135,7 +142,20 @@ var playState = {
     },
 
     playerDie: function () {
-        game.state.start('menu');
+        if (!this.player.alive) {
+            return;
+        }
+        this.player.kill();
+
         this.deadSound.play();
+        this.emitter.x = this.player.x;
+        this.emitter.y = this.player.y;
+        this.emitter.start(true, 600, null, 15);
+
+        game.time.events.add(1000, this.startMenu, this);
+    },
+
+    startMenu: function () {
+        game.state.start('menu');
     }
 };
