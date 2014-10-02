@@ -5,7 +5,7 @@ var menuState = {
 
         // Display the name of the game off screen so we can move in in
         var nameLabel = game.add.text(game.world.centerX, -50, 'Super Coin Box',
-            { font: '50px Arial', fill: '#ffffff' });
+            { font: '70px Geo', fill: '#ffffff' });
         nameLabel.anchor.setTo(0.5, 0.5);
         game.add.tween(nameLabel).to({y: 80}, 1000).easing(Phaser.Easing.Bounce.Out).start();
 
