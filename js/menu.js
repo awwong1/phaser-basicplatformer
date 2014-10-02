@@ -9,9 +9,18 @@ var menuState = {
         nameLabel.anchor.setTo(0.5, 0.5);
         game.add.tween(nameLabel).to({y: 80}, 1000).easing(Phaser.Easing.Bounce.Out).start();
 
+        // Store high score into the database, keep persistent
+        if (!localStorage.getItem('bestScore')) {
+            localStorage.setItem('bestScore', 0);
+        }
+        if (localStorage.getItem('bestScore') < game.global.score) {
+            localStorage.setItem('bestScore', game.global.score);
+        }
+        
         // Show the score at the center of the screen
+        var scoreText = 'score: ' + game.global.score + '\nbest score: ' + localStorage.getItem('bestScore');
         var scoreLabel = game.add.text(game.world.centerX, game.world.centerY,
-                'score: ' + game.global.score,
+            scoreText,
             { font: '25px Arial', fill: '#ffffff' });
         scoreLabel.anchor.setTo(0.5, 0.5);
 
