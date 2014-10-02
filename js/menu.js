@@ -16,12 +16,11 @@ var menuState = {
         if (localStorage.getItem('bestScore') < game.global.score) {
             localStorage.setItem('bestScore', game.global.score);
         }
-        
+
         // Show the score at the center of the screen
         var scoreText = 'score: ' + game.global.score + '\nbest score: ' + localStorage.getItem('bestScore');
         var scoreLabel = game.add.text(game.world.centerX, game.world.centerY,
-            scoreText,
-            { font: '25px Arial', fill: '#ffffff' });
+            scoreText, { font: '25px Arial', fill: '#ffffff' });
         scoreLabel.anchor.setTo(0.5, 0.5);
 
         // Show start game instructions
@@ -31,6 +30,14 @@ var menuState = {
         startLabel.anchor.setTo(0.5, 0.5);
         game.add.tween(startLabel).to({angle: -2}, 500).to({angle: 2}, 500).loop().start();
 
+        // Add mute button
+        this.muteButton = game.add.button(20, 20, 'mute', this.toggleSound, this);
+        this.muteButton.input.useHandCursor = true; // onHover mouse == hand icon
+        if (game.sound.mute) {
+            this.muteButton.frame = 1;
+        }
+
+        // Handle music persistent on
         if (game.global.musicOn == 0) {
             this.music = game.add.audio('music');
             this.music.loop = true;
@@ -47,5 +54,10 @@ var menuState = {
     start: function () {
         // Start the game
         game.state.start('play');
+    },
+
+    toggleSound: function() {
+        game.sound.mute = ! game.sound.mute;
+        this.muteButton.frame = game.sound.mute ? 1 : 0;
     }
 };
