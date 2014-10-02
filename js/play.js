@@ -24,7 +24,7 @@ var playState = {
         this.enemies = game.add.group();
         this.enemies.enableBody = true;
         this.enemies.createMultiple(10, 'enemy');
-        game.time.events.loop(2200, this.addEnemy, this);
+        this.nextEnemy = 0;
 
         // Sounds
         this.jumpSound = game.add.audio('jump');
@@ -50,6 +50,16 @@ var playState = {
         game.physics.arcade.overlap(this.player, this.coin, this.takeCoin, null, this);
         game.physics.arcade.collide(this.enemies, this.walls);
         game.physics.arcade.overlap(this.player, this.enemies, this.playerDie, null, this);
+
+        if (this.nextEnemy < game.time.now) {
+            var start = 4000;
+            var end = 1000;
+            var score = 100;
+
+            var delay = Math.max(start - (start - end) * game.global.score / score, end);
+            this.addEnemy();
+            this.nextEnemy = game.time.now + delay;
+        }
     },
 
     movePlayer: function () {
